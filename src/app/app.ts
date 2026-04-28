@@ -20,14 +20,16 @@ export interface Product{
 
 
 export class App {
-  protected readonly title = signal('my-first-project');
+  protected readonly title = signal('Clothify Store');
 
   productList: Product[] =[
 
-    {id: 1, name: 'Asus ZenBook', price: 250000, icon: '💻'},
-    {id: 2, name: 'iPhone 15 Pro', price: 350000, icon: '📱'},
-    { id: 3, name: 'Wireless Mouse', price: 5000, icon: '🖱️' },
-    { id: 4, name: 'Mechanical Keyboard', price: 15000, icon: '⌨️' }
+{ id: 1, name: 'Classic White T-Shirt', price: 2500, icon: '👕' },
+    { id: 2, name: 'Slim Fit Blue Jeans', price: 5500, icon: '👖' },
+    { id: 3, name: 'Oversized Black Hoodie', price: 8500, icon: '🧥' },
+    { id: 4, name: 'Canvas Sneakers', price: 12500, icon: '👟' },
+    { id: 5, name: 'Denim Jacket', price: 9500, icon: '🧥' },
+    { id: 6, name: 'Casual Summer Cap', price: 1800, icon: '🧢' }
 
   ]
 }

@@ -10,8 +10,10 @@
                 <img [src]="item.imageUrl" alt="{{item.name}}" class="product-image">
                 <h3>{{ item.name }}</h3>
                 <p class="price">Rs. {{ item.price }}</p>
-                <button>Add to Cart</button>
+                <button (click)="addToCart(item)">Add to Cart</button>
             </div>
+
+        
 
         }
     </div>

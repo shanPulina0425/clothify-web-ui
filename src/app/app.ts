@@ -33,6 +33,11 @@ export class App {
 
   ]
 
+  addToCart(item: Product){
+
+    alert(item.name+' added to your Clothify Cart!');
+
+  }
   
 }
 

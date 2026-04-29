@@ -1,6 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Navbar } from './navbar/navbar';
+import { ProductCard } from './product-card/product-card';
 
 
 export interface Product{
@@ -12,7 +13,7 @@ export interface Product{
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,Navbar],
+  imports: [RouterOutlet,Navbar,ProductCard],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -33,11 +34,13 @@ export class App {
 
   ]
 
+  /*
   addToCart(item: Product){
 
     alert(item.name+' added to your Clothify Cart!');
 
   }
+  */
   
 }
 

@@ -5,13 +5,11 @@
 
     <div class="product-grid">
         @for (item of productList; track item.id) {
+
+
+            <app-product-card [item]="item"></app-product-card>
             
-            <div class="card">
-                <img [src]="item.imageUrl" alt="{{item.name}}" class="product-image">
-                <h3>{{ item.name }}</h3>
-                <p class="price">Rs. {{ item.price }}</p>
-                <button (click)="addToCart(item)">Add to Cart</button>
-            </div>
+            
 
         
 

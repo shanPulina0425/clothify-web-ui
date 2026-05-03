@@ -45,11 +45,11 @@ export class App {
 
   myCart: Product[]=[];
 
-  onAddtoCart(selectedItem: Product){
+  onAddToCart(selectedItem: Product){
 
     this.myCart.push(selectedItem);
 
-    alert(selectedItem.name+' added to your Clothify Cart!'+this.myCart.length+' items in cart');
+    alert(selectedItem.name+' added to your Clothify Cart! '+ this.myCart.length+' : items in cart');
 
   }
   

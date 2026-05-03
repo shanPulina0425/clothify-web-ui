@@ -1,1 +1,15 @@
 <p></p>
+<nav class="navbar">
+  <div class="logo">
+    <h2>🛍️ Clothify Store</h2>
+  </div>
+  
+  <div class="cart-container">
+    <span class="cart-icon">🛒 Cart</span>
+    
+    
+    @if (cartCount > 0) {
+      <span class="badge">{{ cartCount }}</span>
+    }
+  </div>
+</nav>

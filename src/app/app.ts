@@ -45,7 +45,7 @@ export class App {
 
   myCart: Product[]=[];
 
-  AddtoCart(selectedItem: Product){
+  onAddtoCart(selectedItem: Product){
 
     this.myCart.push(selectedItem);
 

@@ -4,15 +4,16 @@
     <h2>Our Latest Products</h2>
 
     <div class="product-grid">
+
         @for (item of productList; track item.id) {
 
 
-            <app-product-card [item]="item"></app-product-card>
-            
-            
+            <app-product-card [item]="item"
+            (itemAdded)="AddToCart($event)" >
 
-        
-
+            </app-product-card>
+            
         }
+
     </div>
 </div>

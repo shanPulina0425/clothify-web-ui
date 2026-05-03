@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Product } from '../app';
 
 @Component({
@@ -11,9 +11,11 @@ export class ProductCard {
 
    @Input() item! :Product;
 
+   @Output() itemAdded = new EventEmitter<Product>();
+
   addToCart(){
 
-    alert(this.item.name+' added to your Clothify Cart!');
+    this.itemAdded.emit(this.item);
 
   }
 

@@ -21,6 +21,7 @@ export interface Product{
 
 
 export class App {
+
   protected readonly title = signal('Clothify Store');
 
   productList: Product[] =[
@@ -41,6 +42,16 @@ export class App {
 
   }
   */
+
+  myCart: Product[]=[];
+
+  AddtoCart(selectedItem: Product){
+
+    this.myCart.push(selectedItem);
+
+    alert(selectedItem.name+' added to your Clothify Cart!'+this.myCart.length+' items in cart');
+
+  }
   
 }
 

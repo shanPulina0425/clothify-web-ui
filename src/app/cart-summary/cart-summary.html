@@ -1,0 +1,29 @@
+<div class="summary-box">
+  <h3>🛒 Cart Summary</h3>
+
+  
+  @if (cartItems.length === 0) {
+    <p class="empty-msg">Your cart is empty. Add some products!</p>
+  } 
+  
+  @else {
+    <ul class="item-list">
+      @for (item of cartItems; track item.id) {
+        <li>
+          <span>{{ item.name }}</span>
+          <span>Rs. {{ item.price }}</span>
+        </li>
+      }
+    </ul>
+
+    <hr>
+    
+    <div class="total-row">
+      <strong>Total Amount:</strong>
+      
+      <strong class="price">Rs. {{ totalPrice }}</strong> 
+    </div>
+
+    <button class="checkout-btn">Proceed to Checkout</button>
+  }
+</div>

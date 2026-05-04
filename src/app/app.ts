@@ -2,6 +2,7 @@ import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Navbar } from './navbar/navbar';
 import { ProductCard } from './product-card/product-card';
+import { CartSummary } from './cart-summary/cart-summary';
 
 
 export interface Product{
@@ -13,7 +14,7 @@ export interface Product{
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,Navbar,ProductCard],
+  imports: [RouterOutlet,Navbar,ProductCard,CartSummary],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -52,6 +53,8 @@ export class App {
     alert(selectedItem.name+' added to your Clothify Cart! '+ this.myCart.length+' : items in cart');
 
   }
+
+  
   
 }
 

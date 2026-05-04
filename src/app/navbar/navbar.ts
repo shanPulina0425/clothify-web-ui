@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -9,5 +9,13 @@ import { Component, Input } from '@angular/core';
 export class Navbar {
 
   @Input() cartCount: number=0;
-  
+
+  @Output() cartClicked=new EventEmitter<void>();
+
+  onCartClick(){
+
+    this.cartClicked.emit();
+  }
+
+
 }

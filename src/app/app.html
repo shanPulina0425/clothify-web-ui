@@ -1,5 +1,7 @@
 
-<app-navbar [cartCount]="myCart.length"></app-navbar>
+<app-navbar [cartCount]="myCart.length"
+            (cartClicked)="toggleCart()">
+</app-navbar>
 
 <div class="main-container">
     <h2>Our Latest Products</h2>
@@ -15,9 +17,12 @@
             </app-product-card>
             
         }
+
         
-        <app-cart-summary [cartItems]="myCart"></app-cart-summary>
+        </div>
 
+        @if(isCartVisible) {
+            <app-cart-summary [cartItems]="myCart"></app-cart-summary>
 
-    </div>
+        }
 </div>

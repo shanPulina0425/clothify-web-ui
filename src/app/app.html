@@ -22,7 +22,10 @@
         </div>
 
         @if(isCartVisible) {
-            <app-cart-summary [cartItems]="myCart"></app-cart-summary>
+            <app-cart-summary 
+            [cartItems]="myCart">
+            (closedPopup)="toggleCart()">
+            </app-cart-summary>
 
         }
 </div>

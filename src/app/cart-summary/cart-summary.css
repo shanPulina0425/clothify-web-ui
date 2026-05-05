@@ -45,3 +45,52 @@ h3 { margin-top: 0; color: #333; }
 }
 
 .checkout-btn:hover { background-color: #27ae60; }
+
+
+.modal-overlay {
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6); 
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  z-index: 1000; 
+}
+
+
+.summary-box {
+  background-color: white;
+  padding: 25px;
+  border-radius: 12px;
+  width: 450px; 
+  max-width: 90%;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modal-header h3 {
+  margin: 0;
+}
+
+
+.close-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: #ff4757;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.close-btn:hover {
+  transform: scale(1.1);
+}

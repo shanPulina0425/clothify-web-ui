@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Product } from '../app';
 
 @Component({
@@ -10,6 +10,8 @@ import { Product } from '../app';
 export class CartSummary {
 
   @Input() cartItems:Product[]=[];
+
+  @Output() closePopup = new EventEmitter<void>();
 
   get totalPrice():number{
 

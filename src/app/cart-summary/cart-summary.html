@@ -21,6 +21,12 @@
             <strong style="color: blue;"> x{{ item.quantity }}</strong>
           </span>
           <span>Rs. {{ item.price * (item.quantity || 1)}}</span>
+
+          <button style="color: red; border: none; background: none; cursor: pointer;" 
+                  (click)="removeItem.emit(item.id)">
+            🗑️
+          </button>
+          
         </li>
       }
     </ul>

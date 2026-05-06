@@ -25,7 +25,8 @@
             <app-cart-summary 
             [cartItems]="myCart"
             (closePopup)="toggleCart()"
-            (checkout)="onCheckoutProcess()">
+            (checkout)="onCheckoutProcess()"
+            (removeItem)="onRemoveFromCart($event)">
             </app-cart-summary>
 
         }

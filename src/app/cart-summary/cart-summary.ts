@@ -15,6 +15,8 @@ export class CartSummary {
 
   @Output() checkout =new EventEmitter<void>();
 
+  @Output() removeItem =new EventEmitter<number>();
+
   get totalPrice():number{
 
     let total=0;

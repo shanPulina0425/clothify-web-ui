@@ -87,4 +87,9 @@ export class App {
     this.isCartVisible=false;
     
   }
+
+  onRemoveFromCart(productId: number){
+    this.myCart=this.myCart.filter(item => item.id !==productId);
+  }
+
 }

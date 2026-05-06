@@ -75,4 +75,14 @@ export class App {
         ' : items in cart',
     );
   }
+
+  onCheckoutProcess(){
+    
+    alert('Order Placed Successfully!... Thank you for shopping with Clothify!');
+
+    this.myCart=[];
+
+    this.isCartVisible=false;
+    
+  }
 }

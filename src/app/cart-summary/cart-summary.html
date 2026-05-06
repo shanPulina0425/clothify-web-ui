@@ -17,8 +17,10 @@
     <ul class="item-list">
       @for (item of cartItems; track item.id) {
         <li>
-          <span>{{ item.name }}</span>
-          <span>Rs. {{ item.price }}</span>
+          <span>{{ item.name }}
+            <strong style="color: blue;"> x{{ item.quantity }}</strong>
+          </span>
+          <span>Rs. {{ item.price * (item.quantity || 1)}}</span>
         </li>
       }
     </ul>

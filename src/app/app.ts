@@ -9,6 +9,7 @@ export interface Product {
   name: string;
   price: number;
   imageUrl: string;
+  quantity?: number;
 }
 
 @Component({
@@ -45,17 +46,10 @@ export class App {
       price: 12500,
       imageUrl: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=300&q=80',
     },
-    //{ id: 5, name: 'Denim Jacket', price: 9500, imageUrl: '🧥' },
-    //{ id: 6, name: 'Casual Summer Cap', price: 1800, imageUrl: '🧢' }
+    
   ];
 
-  /*
-  addToCart(item: Product){
-
-    alert(item.name+' added to your Clothify Cart!');
-
-  }
-  */
+  
 
   isCartVisible = false;
 
@@ -66,14 +60,22 @@ export class App {
   myCart: Product[] = [];
 
   onAddToCart(selectedItem: Product) {
-    this.myCart.push(selectedItem);
+    
+    let existingItem = this.myCart.find(item => item.id ===selectedItem.id);
 
-    alert(
-      selectedItem.name +
-        ' added to your Clothify Cart! ' +
-        this.myCart.length +
-        ' : items in cart',
-    );
+    if(existingItem){
+
+      existingItem.quantity! +=1;
+      
+
+    }else{
+
+      let newItem={...selectedItem, quantity:1};
+      this.myCart.push(newItem);
+    }
+
+    alert(selectedItem.name + ' added! Cart size: ' + this.myCart.length);
+
   }
 
   onCheckoutProcess(){

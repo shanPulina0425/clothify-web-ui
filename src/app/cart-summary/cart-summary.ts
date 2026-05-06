@@ -21,7 +21,7 @@ export class CartSummary {
 
     for(let item of this.cartItems){
 
-      total+=item.price
+      total+=item.price * (item.quantity ||1);
 
     }
     return total;

@@ -1,1 +1,9 @@
-<p>home works!</p>
+<div class="product-grid">
+  
+  @for (item of productList; track item.id) {
+    <app-product-card 
+      [item]="item"
+      (itemAdded)="onAddToCart($event)">
+    </app-product-card>
+  }
+</div>

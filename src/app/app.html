@@ -6,20 +6,8 @@
 <div class="main-container">
     <h2>Our Latest Products</h2>
 
-    <div class="product-grid">
+    <router-outlet></router-outlet>
 
-        @for (item of productList; track item.id) {
-
-
-            <app-product-card [item]="item"
-            (itemAdded)="onAddToCart($event)" >
-
-            </app-product-card>
-            
-        }
-
-        
-        </div>
 
         @if(isCartVisible) {
             <app-cart-summary 

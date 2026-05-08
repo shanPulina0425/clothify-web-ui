@@ -61,10 +61,20 @@ src/app/navbar/navbar.css
 src/app/navbar/navbar.html
 src/app/navbar/navbar.spec.ts
 src/app/navbar/navbar.ts
+src/app/pages/checkout/checkout.component.css
+src/app/pages/checkout/checkout.component.html
+src/app/pages/checkout/checkout.component.ts
+src/app/pages/checkout/checkout.spec.ts
+src/app/pages/home/home.component.css
+src/app/pages/home/home.component.html
+src/app/pages/home/home.component.ts
+src/app/pages/home/home.spec.ts
 src/app/product-card/product-card.css
 src/app/product-card/product-card.html
 src/app/product-card/product-card.spec.ts
 src/app/product-card/product-card.ts
+src/app/services/product.service.ts
+src/app/services/product.spec.ts
 src/index.html
 src/main.ts
 src/styles.css
@@ -345,12 +355,6 @@ export const appConfig: ApplicationConfig = {
 };
 </file>
 
-<file path="src/app/app.routes.ts">
-import { Routes } from '@angular/router';
-
-export const routes: Routes = [];
-</file>
-
 <file path="src/app/app.spec.ts">
 import { TestBed } from '@angular/core/testing';
 import { App } from './app';
@@ -427,6 +431,46 @@ describe('Navbar', () => {
 });
 </file>
 
+<file path="src/app/pages/checkout/checkout.component.css">
+
+</file>
+
+<file path="src/app/pages/checkout/checkout.component.html">
+<p>checkout works!</p>
+</file>
+
+<file path="src/app/pages/checkout/checkout.component.ts">
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-checkout',
+  imports: [],
+  templateUrl: './checkout.component.html',
+  styleUrl: './checkout.component.css',
+})
+export class CheckoutComponent {}
+</file>
+
+<file path="src/app/pages/home/home.component.css">
+
+</file>
+
+<file path="src/app/pages/home/home.component.html">
+<p>home works!</p>
+</file>
+
+<file path="src/app/pages/home/home.component.ts">
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-home',
+  imports: [],
+  templateUrl: './home.component.html',
+  styleUrl: './home.component.css',
+})
+export class HomeComponent {}
+</file>
+
 <file path="src/app/product-card/product-card.html">
 <div class="card">
 
@@ -461,6 +505,52 @@ describe('ProductCard', () => {
     expect(component).toBeTruthy();
   });
 });
+</file>
+
+<file path="src/app/services/product.service.ts">
+import { Injectable } from '@angular/core';
+import { Product } from '../app';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class ProductService {
+
+    private products: Product[] = [
+
+      {
+      id: 1,
+      name: 'Classic White T-Shirt',
+      price: 2500,
+      imageUrl: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300&q=80',
+    },
+    {
+      id: 2,
+      name: 'Slim Fit Blue Jeans',
+      price: 5500,
+      imageUrl: 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=300&q=80',
+    },
+    {
+      id: 3,
+      name: 'Oversized Black Hoodie',
+      price: 8500,
+      imageUrl: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=300&q=80',
+    },
+    {
+      id: 4,
+      name: 'Canvas Sneakers',
+      price: 12500,
+      imageUrl: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=300&q=80',
+    }
+
+    ];
+
+    constructor(){}
+
+    getProducts(): Product[] {
+      return this.products;
+    }
+}
 </file>
 
 <file path="src/index.html">
@@ -564,6 +654,21 @@ bootstrapApplication(App, appConfig)
 }
 </file>
 
+<file path="src/app/app.routes.ts">
+import { Routes } from '@angular/router';
+import { HomeComponent } from './pages/home/home.component';
+import { CheckoutComponent } from './pages/checkout/checkout.component';
+
+
+export const routes: Routes = [
+
+  {path:'',component:HomeComponent},
+  {path:'checkout',component:CheckoutComponent},
+  {path:'**',redirectTo:''}
+
+];
+</file>
+
 <file path="src/app/cart-summary/cart-summary.css">
 .summary-box {
   background-color: #f8f9fa;
@@ -663,80 +768,6 @@ h3 { margin-top: 0; color: #333; }
 }
 </file>
 
-<file path="src/app/cart-summary/cart-summary.html">
-<div class="modal-overlay">
-
-<div class="summary-box">
-
-    <div class="modal-header">
-        <h3>🛒 Cart Summary</h3>
-        <button class="close-btn" (click)="closePopup.emit()">×</button>
-    </div>
-  
-
-  
-  @if (cartItems.length === 0) {
-    <p class="empty-msg">Your cart is empty. Add some products!</p>
-  } 
-  
-  @else {
-    <ul class="item-list">
-      @for (item of cartItems; track item.id) {
-        <li>
-          <span>{{ item.name }}</span>
-          <span>Rs. {{ item.price }}</span>
-        </li>
-      }
-    </ul>
-
-    <hr>
-    
-    <div class="total-row">
-      <strong>Total Amount:</strong>
-      
-      <strong class="price">Rs. {{ totalPrice }}</strong> 
-    </div>
-
-    <button class="checkout-btn" (click)="checkout.emit()">Proceed to Checkout</button>
-  }
-</div>
-</div>
-</file>
-
-<file path="src/app/cart-summary/cart-summary.ts">
-import { Component, EventEmitter, Input, output, Output } from '@angular/core';
-import { Product } from '../app';
-
-@Component({
-  selector: 'app-cart-summary',
-  imports: [],
-  templateUrl: './cart-summary.html',
-  styleUrl: './cart-summary.css',
-})
-export class CartSummary {
-
-  @Input() cartItems:Product[]=[];
-
-  @Output() closePopup = new EventEmitter<void>();
-
-  @Output() checkout =new EventEmitter<void>();
-
-  get totalPrice():number{
-
-    let total=0;
-
-    for(let item of this.cartItems){
-
-      total+=item.price
-
-    }
-    return total;
-
-  }
-
-}
-</file>
-
 <file path="src/app/navbar/navbar.css">
 .navbar {
   display: flex;
@@ -773,6 +804,56 @@ export class CartSummary {
   padding: 4px 10px;
   font-size: 0.9rem;
 }
+</file>
+
+<file path="src/app/pages/checkout/checkout.spec.ts">
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { CheckoutComponent } from './checkout.component';
+
+describe('CheckoutComponent', () => {
+  let component: CheckoutComponent;
+  let fixture: ComponentFixture<CheckoutComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [CheckoutComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(CheckoutComponent);
+    component = fixture.componentInstance;
+    await fixture.whenStable();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+</file>
+
+<file path="src/app/pages/home/home.spec.ts">
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { HomeComponent } from './home.component';
+
+describe('HomeComponent', () => {
+  let component: HomeComponent;
+  let fixture: ComponentFixture<HomeComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [HomeComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(HomeComponent);
+    component = fixture.componentInstance;
+    await fixture.whenStable();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
 </file>
 
 <file path="src/app/product-card/product-card.css">
@@ -850,6 +931,25 @@ export class ProductCard {
 }
 </file>
 
+<file path="src/app/services/product.spec.ts">
+import { TestBed } from '@angular/core/testing';
+
+import { ProductService } from './product.service';
+
+describe('ProductService', () => {
+  let service: ProductService;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(ProductService);
+  });
+
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+});
+</file>
+
 <file path="src/app/app.css">
 .main-container {
     padding: 20px 50px;
@@ -905,6 +1005,90 @@ export class Navbar {
 </nav>
 </file>
 
+<file path="src/app/cart-summary/cart-summary.html">
+<div class="modal-overlay">
+
+<div class="summary-box">
+
+    <div class="modal-header">
+        <h3>🛒 Cart Summary</h3>
+        <button class="close-btn" (click)="closePopup.emit()">×</button>
+    </div>
+  
+
+  
+  @if (cartItems.length === 0) {
+    <p class="empty-msg">Your cart is empty. Add some products!</p>
+  } 
+  
+  @else {
+    <ul class="item-list">
+      @for (item of cartItems; track item.id) {
+        <li>
+          <span>{{ item.name }}
+            <strong style="color: blue;"> x{{ item.quantity }}</strong>
+          </span>
+          <span>Rs. {{ item.price * (item.quantity || 1)}}</span>
+
+          <button style="color: red; border: none; background: none; cursor: pointer;" 
+                  (click)="removeItem.emit(item.id)">
+            🗑️
+          </button>
+          
+        </li>
+      }
+    </ul>
+
+    <hr>
+    
+    <div class="total-row">
+      <strong>Total Amount:</strong>
+      
+      <strong class="price">Rs. {{ totalPrice }}</strong> 
+    </div>
+
+    <button class="checkout-btn" (click)="checkout.emit()">Proceed to Checkout</button>
+  }
+</div>
+</div>
+</file>
+
+<file path="src/app/cart-summary/cart-summary.ts">
+import { Component, EventEmitter, Input, output, Output } from '@angular/core';
+import { Product } from '../app';
+
+@Component({
+  selector: 'app-cart-summary',
+  imports: [],
+  templateUrl: './cart-summary.html',
+  styleUrl: './cart-summary.css',
+})
+export class CartSummary {
+
+  @Input() cartItems:Product[]=[];
+
+  @Output() closePopup = new EventEmitter<void>();
+
+  @Output() checkout =new EventEmitter<void>();
+
+  @Output() removeItem =new EventEmitter<number>();
+
+  get totalPrice():number{
+
+    let total=0;
+
+    for(let item of this.cartItems){
+
+      total+=item.price * (item.quantity ||1);
+
+    }
+    return total;
+
+  }
+
+}
+</file>
+
 <file path="src/app/app.html">
 <app-navbar [cartCount]="myCart.length"
             (cartClicked)="toggleCart()">
@@ -913,26 +1097,15 @@ export class Navbar {
 <div class="main-container">
     <h2>Our Latest Products</h2>
 
-    <div class="product-grid">
+    <router-outlet></router-outlet>
 
-        @for (item of productList; track item.id) {
-
-
-            <app-product-card [item]="item"
-            (itemAdded)="onAddToCart($event)" >
-
-            </app-product-card>
-            
-        }
-
-        
-        </div>
 
         @if(isCartVisible) {
             <app-cart-summary 
-            [cartItems]="myCart">
-            (closedPopup)="toggleCart()"
-            (checkout)="onCheckoutProcess()">
+            [cartItems]="myCart"
+            (closePopup)="toggleCart()"
+            (checkout)="onCheckoutProcess()"
+            (removeItem)="onRemoveFromCart($event)">
             </app-cart-summary>
 
         }
@@ -940,17 +1113,19 @@ export class Navbar {
 </file>
 
 <file path="src/app/app.ts">
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Navbar } from './navbar/navbar';
 import { ProductCard } from './product-card/product-card';
 import { CartSummary } from './cart-summary/cart-summary';
+import { ProductService } from './services/product.service';
 
 export interface Product {
   id: number;
   name: string;
   price: number;
   imageUrl: string;
+  quantity?: number;
 }
 
 @Component({
@@ -962,42 +1137,11 @@ export interface Product {
 export class App {
   protected readonly title = signal('Clothify Store');
 
-  productList: Product[] = [
-    {
-      id: 1,
-      name: 'Classic White T-Shirt',
-      price: 2500,
-      imageUrl: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300&q=80',
-    },
-    {
-      id: 2,
-      name: 'Slim Fit Blue Jeans',
-      price: 5500,
-      imageUrl: 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=300&q=80',
-    },
-    {
-      id: 3,
-      name: 'Oversized Black Hoodie',
-      price: 8500,
-      imageUrl: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=300&q=80',
-    },
-    {
-      id: 4,
-      name: 'Canvas Sneakers',
-      price: 12500,
-      imageUrl: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=300&q=80',
-    },
-    //{ id: 5, name: 'Denim Jacket', price: 9500, imageUrl: '🧥' },
-    //{ id: 6, name: 'Casual Summer Cap', price: 1800, imageUrl: '🧢' }
-  ];
+  private productService = inject(ProductService);
 
-  /*
-  addToCart(item: Product){
+  productList: Product[] = this.productService.getProducts();
 
-    alert(item.name+' added to your Clothify Cart!');
-
-  }
-  */
+  
 
   isCartVisible = false;
 
@@ -1008,14 +1152,22 @@ export class App {
   myCart: Product[] = [];
 
   onAddToCart(selectedItem: Product) {
-    this.myCart.push(selectedItem);
+    
+    let existingItem = this.myCart.find(item => item.id ===selectedItem.id);
 
-    alert(
-      selectedItem.name +
-        ' added to your Clothify Cart! ' +
-        this.myCart.length +
-        ' : items in cart',
-    );
+    if(existingItem){
+
+      existingItem.quantity! +=1;
+      
+
+    }else{
+
+      let newItem={...selectedItem, quantity:1};
+      this.myCart.push(newItem);
+    }
+
+    alert(selectedItem.name + ' added! Cart size: ' + this.myCart.length);
+
   }
 
   onCheckoutProcess(){
@@ -1027,6 +1179,11 @@ export class App {
     this.isCartVisible=false;
     
   }
+
+  onRemoveFromCart(productId: number){
+    this.myCart=this.myCart.filter(item => item.id !==productId);
+  }
+
 }
 </file>
 

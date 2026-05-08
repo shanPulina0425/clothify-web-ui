@@ -19,14 +19,10 @@ export interface Product {
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
+
 export class App {
-  protected readonly title = signal('Clothify Store');
-
-  private productService = inject(ProductService);
-
-  productList: Product[] = this.productService.getProducts();
-
   
+  protected readonly title = signal('Clothify Store');
 
   isCartVisible = false;
 
@@ -36,24 +32,7 @@ export class App {
 
   myCart: Product[] = [];
 
-  onAddToCart(selectedItem: Product) {
-    
-    let existingItem = this.myCart.find(item => item.id ===selectedItem.id);
-
-    if(existingItem){
-
-      existingItem.quantity! +=1;
-      
-
-    }else{
-
-      let newItem={...selectedItem, quantity:1};
-      this.myCart.push(newItem);
-    }
-
-    alert(selectedItem.name + ' added! Cart size: ' + this.myCart.length);
-
-  }
+  
 
   onCheckoutProcess(){
     
